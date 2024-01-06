@@ -6,6 +6,7 @@ st.set_page_config(page_title='Xata Demo',layout='wide')
 xata = st.connection('xata',type=XataConnection)
 
 st.title('🖼️ Gallery demo')
+st.caption("Powered by Xata")
 st.divider()
 if "Images" not in st.session_state or st.session_state.Images is None:
     st.session_state["Images"] = xata.query("Images",{"page":{ "size": 6}, "sort": {"xata.createdAt": "desc"}})
@@ -92,4 +93,3 @@ if st.toggle("Upload Image"):
 
 st.divider()
 st.caption("Made with ❤️ by Sergio Lopez Martinez")
-st.caption("Powered by Xata")

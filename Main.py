@@ -4,7 +4,8 @@ import requests
 
 st.set_page_config(page_title='Xata Demo',layout='wide')
 xata = st.connection('xata',type=XataConnection)
-st.subheader('Gallery demo')
+
+st.title('🖼️ Gallery demo')
 st.divider()
 if "Images" not in st.session_state or st.session_state.Images is None:
     st.session_state["Images"] = xata.query("Images",{"page":{ "size": 6}, "sort": {"xata.createdAt": "desc"}})
@@ -75,10 +76,10 @@ def show_images( images):
 
 show_images(st.session_state.Images["records"])
 colss = st.columns([0.3,0.2,0.2,0.3])
-if colss[1].button("Previous"):
+if colss[1].button("⏮️ Previous",use_container_width=True):
     st.session_state.Images = xata.prev_page("Images",st.session_state.Images,pagesize=6)
     st.rerun()
-if colss[2].button("Next"):
+if colss[2].button("Next ⏭️",use_container_width=True):
     st.session_state.Images = xata.next_page("Images",st.session_state.Images,pagesize=6)
     st.rerun()
 st.write()

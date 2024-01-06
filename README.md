@@ -1,6 +1,8 @@
 
 # Streamlit-Xata Gallery App
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-gallery-xata-demo.streamlit.app/)  [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+
 Welcome to the Streamlit-Xata Gallery App, a lightweight and powerful solution for displaying images from a database with seamless pagination and an easy-to-use upload option. This application, built with Streamlit, Xata, and the st-xatadb-connection package, demonstrates the efficiency of combining these technologies to create a feature-rich image gallery in less than 100 lines of code.
 
 ## Key Features

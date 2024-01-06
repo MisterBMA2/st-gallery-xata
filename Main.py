@@ -20,6 +20,7 @@ def upload():
     url = st.text_input("Or provide a URL")
     caption = st.text_area("Caption")
 
+    # Enable the button when you are using your own Xata account
     if st.button("Upload",disabled=True):
 
         data = requests.get(url,timeout=5,stream=True).content

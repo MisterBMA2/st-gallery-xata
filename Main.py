@@ -82,9 +82,6 @@ show_images(st.session_state.Images[st.session_state.page]["records"])
 
 colss = st.columns([0.8,0.1,0.1])
 
-with colss[0]:
-    st.caption("Page {}".format(st.session_state.page + 1))
-
 if colss[1].button("⏮️",use_container_width=True):
     if st.session_state.page > 0:
         st.session_state.page -= 1

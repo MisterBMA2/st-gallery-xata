@@ -87,7 +87,7 @@ if colss[1].button("⏮️ Previous",use_container_width=True):
     st.rerun()
 
 if colss[2].button("Next ⏭️",use_container_width=True):
-    st.session_state.Images.append(xata.next_page("Images",st.session_state.Images,pagesize=6))
+    st.session_state.Images.append(xata.next_page("Images",st.session_state.Images[st.session_state.page],pagesize=6))
     st.session_state.page += 1
     if st.session_state.Images[st.session_state.page] is None:
         del st.session_state.Images[st.session_state.page]

@@ -9,11 +9,13 @@ st.title('🖼️ Gallery demo')
 st.caption("Powered by Xata")
 st.divider()
 if "Images" not in st.session_state or st.session_state.Images is None:
-    st.session_state["Images"] = xata.query("Images",{"page":{ "size": 6}, "sort": {"xata.createdAt": "desc"}})
+    st.session_state["Images"] = [xata.query("Images",{"page":{ "size": 6}, "sort": {"xata.createdAt": "desc"}})]
+
+if 'page' not in st.session_state:
+    st.session_state['page'] = 0
 
 def update_images():
-    st.session_state.Images = xata.query("Images",{"page":{ "size": 6}, "sort": {"xata.createdAt": "desc"}})
-
+    st.session_state.Images = [xata.query("Images",{"page":{ "size": 6}, "sort": {"xata.createdAt": "desc"}})]
 
 def upload():
     file = st.file_uploader("Upload file", type=["jpg", "png"])
@@ -76,21 +78,24 @@ def show_images( images):
         if len(images) > 5:
             cols2[2].image(images[5]["image"]["url"], width=200, caption=images[5]["caption"],use_column_width=True)
 
-show_images(st.session_state.Images["records"])
+show_images(st.session_state.Images[st.session_state.page]["records"])
+
 colss = st.columns([0.3,0.2,0.2,0.3])
 if colss[1].button("⏮️ Previous",use_container_width=True):
-    st.session_state.Images = xata.prev_page("Images",st.session_state.Images,pagesize=6)
+    if st.session_state.page > 0:
+        st.session_state.page -= 1
     st.rerun()
+
 if colss[2].button("Next ⏭️",use_container_width=True):
-    st.session_state.Images = xata.next_page("Images",st.session_state.Images,pagesize=6)
+    st.session_state.Images.append(xata.next_page("Images",st.session_state.Images,pagesize=6))
+    st.session_state.page += 1
+    if st.session_state.Images[st.session_state.page] is None:
+        del st.session_state.Images[st.session_state.page]
+        st.session_state.page = 0
     st.rerun()
 st.write()
-
 if st.toggle("Upload Image"):
     upload()
-
-
-
 
 st.divider()
 st.caption("Made with ❤️ by Sergio Lopez Martinez")

@@ -90,11 +90,11 @@ if colss[1].button("⏮️",use_container_width=True):
 if colss[2].button("⏭️",use_container_width=True):
     st.session_state.Images.append(xata.next_page("Images",st.session_state.Images[st.session_state.page],pagesize=6))
     st.session_state.page += 1
-    if st.session_state.Images[st.session_state.page] is None:
-        del st.session_state.Images[st.session_state.page]
+    if st.session_state.Images[-1] is None:
+        del st.session_state.Images[-1]
         st.session_state.page = 0
     st.rerun()
-st.write()
+
 if st.toggle("Upload Image"):
     upload()
 

@@ -80,13 +80,17 @@ def show_images( images):
 
 show_images(st.session_state.Images[st.session_state.page]["records"])
 
-colss = st.columns([0.3,0.2,0.2,0.3])
-if colss[1].button("⏮️ Previous",use_container_width=True):
+colss = st.columns([0.8,0.1,0.1])
+
+with colss[0]:
+    st.caption("Page {}".format(st.session_state.page + 1))
+
+if colss[1].button("⏮️",use_container_width=True):
     if st.session_state.page > 0:
         st.session_state.page -= 1
     st.rerun()
 
-if colss[2].button("Next ⏭️",use_container_width=True):
+if colss[2].button("⏭️",use_container_width=True):
     st.session_state.Images.append(xata.next_page("Images",st.session_state.Images[st.session_state.page],pagesize=6))
     st.session_state.page += 1
     if st.session_state.Images[st.session_state.page] is None:
